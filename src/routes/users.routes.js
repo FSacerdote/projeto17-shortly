@@ -1,9 +1,9 @@
 import { Router } from "express"
-import { getUser } from "../controllers/users.controllers.js"
+import { getRanking, getUser } from "../controllers/users.controllers.js"
 
 const usersRouter = Router()
 
 usersRouter.get("/users/me", getUser)
-usersRouter.get("/ranking")
+usersRouter.get("/ranking", getRanking)
 
 export default usersRouter

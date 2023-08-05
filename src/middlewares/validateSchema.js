@@ -3,7 +3,7 @@ export default function validateSchema (schema) {
         const schemaValidation = schema.validate(req.body, {abortEarly: false})
         if(schemaValidation.error){
             const errors = schemaValidation.error.details.map((detail)=> detail.message)
-            res.status(422).send(errors)
+            return res.status(422).send(errors)
         }
         next()
     }

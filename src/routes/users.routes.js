@@ -2,7 +2,7 @@ import { Router } from "express"
 
 const usersRouter = Router()
 
-rankingRouter.get("/users/me")
-rankingRouter.get("/ranking")
+usersRouter.get("/users/me")
+usersRouter.get("/ranking")
 
 export default usersRouter

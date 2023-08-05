@@ -19,7 +19,7 @@ export async function signin (req, res){
     const {email, password} = req.body
     try {
         const response = await db.query(`SELECT * FROM users WHERE email = $1;`, [email])
-        if(!response.rowCount) return res.sendStatus(404)
+        if(!response.rowCount) return res.sendStatus(401)
         const user = response.rows[0]
         const passwordValidation = compareSync(password, user.password)
         if(!passwordValidation) return res.sendStatus(401)

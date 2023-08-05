@@ -23,7 +23,7 @@ export async function shorten(req, res){
 export async function getUrlById(req, res){
     const {id} = req.params
     try {
-        const url = await db.query(`SELECT id, shorturl, url FROM urls WHERE id=$1;`, [id])
+        const url = await db.query(`SELECT id, shorturl AS "shortUrl", url FROM urls WHERE id=$1;`, [id])
         if(!url.rowCount) return res.sendStatus(404)
         res.send(url.rows[0])
     } catch (error) {
@@ -38,7 +38,7 @@ export async function openUrl(req, res){
         if(!response.rowCount) return res.sendStatus(404)
         await db.query(`UPDATE urls SET visitCount=$1 WHERE shorturl=$2;`, [response.rows[0].visitcount + 1, shortUrl])
         const url = response.rows[0].url
-        res.redirect(200, url)
+        res.redirect(url)
     } catch (error) {
         res.status(500).send(req, res)
     }
